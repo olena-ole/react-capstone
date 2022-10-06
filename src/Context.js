@@ -15,9 +15,9 @@ function ContextProvider(props) {
                 return prevPhoto.id === id ? 
                     {...prevPhoto, isFavorite: !prevPhoto.isFavorite} : 
                     prevPhoto
-                }) 
-        })
-    }
+                });
+        });
+    };
 
     function addToCart(imgObj) {
         setCartItems(prev => [...prev, imgObj]);
@@ -25,7 +25,11 @@ function ContextProvider(props) {
 
     function removeFromCart(id) {
         setCartItems(prev => prev.filter( photo => photo.id !== id));
-    }
+    };
+
+    function emptyCart() {
+        setCartItems([]);
+    };
 
     useEffect( () => {
         fetch(url)
@@ -34,7 +38,7 @@ function ContextProvider(props) {
     }, []);
 
     return (
-        <Context.Provider value={{allPhotos, toggleFavorite, addToCart, removeFromCart, cartItems}}>
+        <Context.Provider value={{allPhotos, toggleFavorite, cartItems, addToCart, removeFromCart, emptyCart}}>
             {props.children}
         </Context.Provider>
     );
