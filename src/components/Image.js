@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 function Image({className, img}) {
 
-    const {toggleFavorite} = useContext(Context);
+    const { toggleFavorite, addImageToCart } = useContext(Context);
 
     const [hovered, setHovered] = useState(false);
 
@@ -16,7 +16,7 @@ function Image({className, img}) {
         }
     };
 
-    const plusIcon = hovered && <i className="ri-add-circle-line cart"></i>;
+    const plusIcon = hovered && <i className="ri-add-circle-line cart" onClick={() => addImageToCart(img)}></i>;
     
     return (
         <div 
