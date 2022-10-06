@@ -19,9 +19,13 @@ function ContextProvider(props) {
         })
     }
 
-    function addImageToCart(imgObj) {
+    function addToCart(imgObj) {
         setCartItems(prev => [...prev, imgObj]);
     };
+
+    function removeFromCart(id) {
+        setCartItems(prev => prev.filter( photo => photo.id !== id));
+    }
 
     useEffect( () => {
         fetch(url)
@@ -30,7 +34,7 @@ function ContextProvider(props) {
     }, []);
 
     return (
-        <Context.Provider value={{allPhotos, toggleFavorite, addImageToCart}}>
+        <Context.Provider value={{allPhotos, toggleFavorite, addToCart, removeFromCart, cartItems}}>
             {props.children}
         </Context.Provider>
     );
