@@ -19,14 +19,12 @@ function Cart() {
     };
 
     function placeOrder() {
-        if (cartItems.length) {
-            setButtonText('Ordering...');
-            setTimeout( () => {
-                emptyCart();
-                console.log('Your order is placed!');
-                setButtonText('Place Order');
-            }, 3000);
-        };
+        setButtonText('Ordering...');
+        setTimeout( () => {
+            emptyCart();
+            console.log('Your order is placed!');
+            setButtonText('Place Order');
+        }, 3000);
     };
 
     return (
@@ -35,7 +33,11 @@ function Cart() {
             {cartItemEls}
             <p className="total-cost">Total: {countTotal()}</p>
             <div className="order-button">
-                <button onClick={placeOrder}>{buttonText}</button>
+                {
+                cartItems.length ? 
+                <button onClick={placeOrder}>{buttonText}</button> : 
+                <p>You have no items in your cart</p>
+                }    
             </div>
         </main>
     );
